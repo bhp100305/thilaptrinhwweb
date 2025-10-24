@@ -1,0 +1,54 @@
+﻿@model BuiHuyPhu_231230867_de02.Models.BhpCatalog
+
+@{
+    ViewData["Title"] = "Xóa sản phẩm";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">🗑️ Xóa sản phẩm</h4>
+        </div>
+
+        <div class="card-body">
+            <h5 class="text-danger mb-3">Bạn có chắc muốn xóa sản phẩm này không?</h5>
+            <hr />
+
+            <dl class="row">
+                <dt class="col-sm-3">Tên sản phẩm</dt>
+                <dd class="col-sm-9">@Model.HvtCateName</dd>
+
+                <dt class="col-sm-3">Giá</dt>
+                <dd class="col-sm-9">@Model.HvtCatePrice</dd>
+
+                <dt class="col-sm-3">Số lượng</dt>
+                <dd class="col-sm-9">@Model.HvtCateQty</dd>
+
+                <dt class="col-sm-3">Ảnh</dt>
+                <dd class="col-sm-9">
+                    @if (!string.IsNullOrEmpty(Model.HvtPicture))
+                    {
+                        <img src="@Model.HvtPicture" alt="Ảnh sản phẩm" width="150" height="100" style="object-fit:cover;border-radius:8px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted fst-italic">Chưa có ảnh</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">Trạng thái</dt>
+                <dd class="col-sm-9">
+                    @(Model.HvtCateActive ? "Kích hoạt" : "Ngừng")
+                </dd>
+            </dl>
+
+            <form asp-action="bhpDeleteConfirmed" method="post">
+                <input type="hidden" asp-for="HvtId" />
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="bhpIndex" class="btn btn-secondary">⬅️ Quay lại</a>
+                    <input type="submit" value="🗑️ Xóa" class="btn btn-danger px-4" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+}
+
+<div class="container mt-4">
+    <div class="card shadow border-0">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">📋 Danh sách sản phẩm</h4>
+        </div>
+
+        <div class="card-body">
+            <p>
+                <a asp-action="bhpCreate" class="btn btn-success mb-3">➕ Thêm mới</a>
+            </p>
+
+            <table class="table table-striped table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Ảnh</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.HvtCateName</td>
+                            <td>@item.HvtCatePrice</td>
+                            <td>@item.HvtCateQty</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.HvtPicture))
+                                {
+                                    <img src="@item.HvtPicture" width="80" height="60" style="object-fit:cover;border-radius:6px;" />
+                                }
+                                else
+                                {
+                                    <span class="text-muted fst-italic">Chưa có ảnh</span>
+                                }
+                            </td>
+                            <td>@(item.HvtCateActive ? "Kích hoạt" : "Ngừng")</td>
+                            <td>
+                                <a asp-action="bhpEdit" asp-route-id="@item.HvtId" class="btn btn-warning btn-sm">✏️ Sửa</a>
+                                <a asp-action="bhpDetails" asp-route-id="@item.HvtId" class="btn btn-info btn-sm">🔍 Xem</a>
+                                <a asp-action="bhpDelete" asp-route-id="@item.HvtId" class="btn btn-danger btn-sm">🗑️ Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

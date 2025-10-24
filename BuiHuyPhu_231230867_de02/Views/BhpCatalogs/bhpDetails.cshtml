@@ -1,0 +1,48 @@
+﻿@model BuiHuyPhu_231230867_de02.Models.BhpCatalog
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>BhpCatalog</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HvtCateName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HvtCateName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HvtCatePrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HvtCatePrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HvtCateQty)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HvtCateQty)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HvtPicture)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HvtPicture)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HvtCateActive)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HvtCateActive)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="bhpEdit" asp-route-id="@Model?.HvtId">Edit</a> |
+    <a asp-action="bhpIndex">Back to List</a>
+</div>

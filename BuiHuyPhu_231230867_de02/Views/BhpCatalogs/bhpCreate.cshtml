@@ -1,0 +1,91 @@
+﻿@model BuiHuyPhu_231230867_de02.Models.BhpCatalog
+
+@{
+    ViewData["Title"] = "Thêm sản phẩm mới";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">➕ Thêm sản phẩm mới</h4>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="bhpCreate" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="HvtCateName" class="form-label fw-semibold"></label>
+                    <input asp-for="HvtCateName" class="form-control" placeholder="Nhập tên sản phẩm..." />
+                    <span asp-validation-for="HvtCateName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="HvtCatePrice" class="form-label fw-semibold"></label>
+                    <input asp-for="HvtCatePrice" class="form-control" placeholder="Nhập giá sản phẩm..." />
+                    <span asp-validation-for="HvtCatePrice" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="HvtCateQty" class="form-label fw-semibold"></label>
+                    <input asp-for="HvtCateQty" class="form-control" placeholder="Nhập số lượng tồn..." />
+                    <span asp-validation-for="HvtCateQty" class="text-danger"></span>
+                </div>
+
+                <!-- Upload ảnh -->
+                <div class="mb-3">
+                    <label asp-for="HvtPicture" class="form-label fw-semibold"></label>
+                    <div class="input-group">
+                        <input asp-for="HvtPicture" class="form-control" id="pictureFileName" placeholder="Tên file ảnh (vd: hinh1.jpg)" readonly />
+                        <input type="file" id="uploadFile" class="form-control" accept="image/*" style="max-width:300px" />
+                    </div>
+                    <div class="mt-3">
+                        <img id="previewImage" src="#" alt="Xem trước ảnh" class="img-thumbnail" style="max-width: 250px; display:none;" />
+                    </div>
+                    <span asp-validation-for="HvtPicture" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="HvtCateActive" class="form-label fw-semibold"></label>
+                    <select asp-for="HvtCateActive" class="form-select">
+                        <option value="true">Kích hoạt</option>
+                        <option value="false">Ngừng</option>
+                    </select>
+                    <span asp-validation-for="HvtCateActive" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="bhpIndex" class="btn btn-secondary">
+                        ⬅️ Quay lại danh sách
+                    </a>
+                    <input type="submit" value="💾 Lưu sản phẩm" class="btn btn-success px-4" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const uploadFile = document.getElementById("uploadFile");
+        const previewImage = document.getElementById("previewImage");
+        const pictureFileName = document.getElementById("pictureFileName");
+
+        uploadFile.addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                pictureFileName.value = file.name;
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
